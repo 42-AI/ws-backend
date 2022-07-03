@@ -3,6 +3,7 @@ package auth
 import (
 	"context"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"github.com/42-AI/ws-backend/db"
 	"github.com/42-AI/ws-backend/internal/logger"
@@ -159,5 +160,5 @@ func (m *auth) GenerateToken(userID string) (string, error) {
 
 func (m *auth) HashPassword(userEmail, pwd string) string {
 	b := sha256.Sum256([]byte(userEmail + pwd + salt))
-	return string(b[0:])
+	return hex.EncodeToString(b[:])
 }
