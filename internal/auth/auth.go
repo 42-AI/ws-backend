@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"crypto/sha256"
 	"fmt"
 	"github.com/42-AI/ws-backend/db"
 	"github.com/42-AI/ws-backend/internal/logger"
@@ -15,6 +16,7 @@ const (
 	userCtxKey  = "user"
 	userIDClaim = "user_id"
 	authHeader  = "auth"
+	salt        = "b?6e?YQ5894@8pY$"
 )
 
 type option int
@@ -29,6 +31,7 @@ type Auth interface {
 	Middleware() func(http.Handler) http.Handler
 	GenerateToken(userID string) (string, error)
 	UserFromContext(ctx context.Context, authOpt option) (db.User, error)
+	HashPassword(userEmail, pwd string) [sha256.Size]byte
 }
 
 type auth struct {
@@ -152,4 +155,8 @@ func (m *auth) GenerateToken(userID string) (string, error) {
 	}
 
 	return ret, nil
+}
+
+func (m *auth) HashPassword(userEmail, pwd string) [sha256.Size]byte {
+	return sha256.Sum256([]byte(userEmail + pwd + salt))
 }
