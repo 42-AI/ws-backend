@@ -25,6 +25,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input NewUser) (*User
 		ID:        uuid.New().String(),
 		Admin:     false,
 		Email:     input.Email,
+		Password:  input.Password,
 		CreatedAt: time.Now(),
 	}
 	err = r.Dbal.CreateUser(ctx, newUser)

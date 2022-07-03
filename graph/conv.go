@@ -29,6 +29,7 @@ func UserFromDBModel(u db.User) User {
 		ID:        u.ID,
 		Admin:     u.Admin,
 		Email:     u.Email,
+		Password:  u.Password,
 		CreatedAt: u.CreatedAt,
 	}
 }
@@ -58,6 +59,7 @@ func UserToDBModel(u User) db.User {
 		ID:        u.ID,
 		Admin:     u.Admin,
 		Email:     u.Email,
+		Password:  u.Password,
 		CreatedAt: u.CreatedAt,
 	}
 }

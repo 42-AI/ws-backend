@@ -53,11 +53,13 @@ type User {
   id: ID!
   admin: Boolean!
   email: String!
+  password: String!
   created_at: Time!
 }
 
 input newUser {
   email: String!
+  password: String!
 }
 
 type Query {
