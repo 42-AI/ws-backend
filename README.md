@@ -91,7 +91,7 @@ We will login with the admin user using the GraphQL API.
 - copy / paste the following request to log in as the admin user:
 ```graphql
 query login {
-  login (id: "admin-user@email.com", pwd: "") {
+  login (id: "admin-user@email.com", pwd: "password") {
     ... on Token {
       token
       userId
@@ -126,10 +126,12 @@ We will now see how to create user and task with the GraphQL API.
 - To create a new user, paste the following in the console:
 ```graphql
 mutation tuto_create_user {
-  create_user(input:{email:"just-for-test@email.com"}) {
-    id
-    email
-  }
+    create_user(input:{email:"test@gmail.com", password:"test"}) {
+        id
+        admin
+        email
+        created_at
+    }
 }
 ```
 - if you send the request like this you will get a `401` error because you are not authenticated
