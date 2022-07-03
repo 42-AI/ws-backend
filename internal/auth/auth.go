@@ -31,7 +31,7 @@ type Auth interface {
 	Middleware() func(http.Handler) http.Handler
 	GenerateToken(userID string) (string, error)
 	UserFromContext(ctx context.Context, authOpt option) (db.User, error)
-	HashPassword(userEmail, pwd string) [sha256.Size]byte
+	HashPassword(userEmail, pwd string) string
 }
 
 type auth struct {
@@ -157,6 +157,7 @@ func (m *auth) GenerateToken(userID string) (string, error) {
 	return ret, nil
 }
 
-func (m *auth) HashPassword(userEmail, pwd string) [sha256.Size]byte {
-	return sha256.Sum256([]byte(userEmail + pwd + salt))
+func (m *auth) HashPassword(userEmail, pwd string) string {
+	b := sha256.Sum256([]byte(userEmail + pwd + salt))
+	return string(b[0:])
 }

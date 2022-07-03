@@ -48,7 +48,6 @@ type User struct {
 	ID        string    `json:"id"`
 	Admin     bool      `json:"admin"`
 	Email     string    `json:"email"`
-	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
 }
 

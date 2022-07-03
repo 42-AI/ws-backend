@@ -1,7 +1,6 @@
 package db
 
 import (
-	"crypto/sha256"
 	"fmt"
 	"io"
 	"strconv"
@@ -43,7 +42,7 @@ type User struct {
 	ID        string    `json:"id"`
 	Admin     bool      `json:"admin"`
 	Email     string    `json:"email"`
-	Password  [sha256.Size]byte    `json:"password"`
+	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
