@@ -23,7 +23,8 @@
         "ignore_above" : 256
       },
       "password" : {
-        "type" : "binary"
+        "type" : "keyword",
+        "ignore_above" : 256
       }
     }
   }
