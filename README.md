@@ -147,8 +147,10 @@ mutation tuto_create_user {
 {
   "data": {
     "create_user": {
-      "id": "86c776ec-9abe-43a0-93f1-4dac0997ba90",
-      "email": "just-for-tes3t@email.com"
+      "id": "4d235e36-2fd4-425a-a79f-c0944d444603",
+      "admin": false,
+      "email": "test@gmail.com",
+      "created_at": "2022-07-05T17:09:12+02:00"
     }
   }
 }
