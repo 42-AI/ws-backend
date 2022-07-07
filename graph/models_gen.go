@@ -58,7 +58,8 @@ type NewTask struct {
 }
 
 type NewUser struct {
-	Email string `json:"email"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type Status string

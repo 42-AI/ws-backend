@@ -25,6 +25,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input NewUser) (*User
 		ID:        uuid.New().String(),
 		Admin:     false,
 		Email:     input.Email,
+		Password:  r.Auth.HashPassword(input.Email, input.Password),
 		CreatedAt: time.Now(),
 	}
 	err = r.Dbal.CreateUser(ctx, newUser)
@@ -104,7 +105,15 @@ func (r *queryResolver) Login(ctx context.Context, id string, pwd string) (Login
 	r.Log.Debug("login...", zap.String("id", id))
 	user, err = r.Dbal.GetUserByEmail(ctx, id)
 	if err != nil {
-		r.Log.Debug("")
+		r.Log.Debug("user not found in DB", zap.Error(err))
+		return Error{
+			Code:    403,
+			Message: "wrong username or/and password",
+		}, err
+	}
+	h := r.Auth.HashPassword(user.Email, pwd)
+	if user.Password != h {
+		r.Log.Debug("wrong password", zap.String("expected", user.Password), zap.String("got", h))
 		return Error{
 			Code:    403,
 			Message: "wrong username or/and password",

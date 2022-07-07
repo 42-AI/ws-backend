@@ -58,6 +58,7 @@ type User {
 
 input newUser {
   email: String!
+  password: String!
 }
 
 type Query {

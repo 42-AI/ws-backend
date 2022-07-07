@@ -46,6 +46,7 @@ var user1 = User{
 	ID:        "id-user1",
 	Admin:     false,
 	Email:     "user1@mail-adress.com",
+	Password:  "password",
 	CreatedAt: now,
 }
 
