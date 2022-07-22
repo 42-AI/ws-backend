@@ -135,6 +135,7 @@ func (r *queryResolver) Login(ctx context.Context, id string, pwd string) (Login
 		Username: user.Email,
 		Token:    token,
 		UserID:   user.ID,
+		IsAdmin:  user.Admin,
 	}, nil
 }
 

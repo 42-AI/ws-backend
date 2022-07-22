@@ -40,6 +40,7 @@ type Token struct {
 	Username string `json:"username"`
 	Token    string `json:"token"`
 	UserID   string `json:"userId"`
+	IsAdmin  bool   `json:"isAdmin"`
 }
 
 func (Token) IsLoginRes() {}
