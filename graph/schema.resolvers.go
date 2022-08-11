@@ -21,9 +21,15 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input NewUser) (*User
 	}
 
 	r.Log.Debug("create user...", zap.String("user_id", dbu.ID))
+	var isAdmin bool
+	if input.IsAdmin == nil {
+		isAdmin = false
+	} else {
+		isAdmin = *input.IsAdmin
+	}
 	newUser := db.User{
 		ID:        uuid.New().String(),
-		Admin:     false,
+		Admin:     isAdmin,
 		Email:     input.Email,
 		Password:  r.Auth.HashPassword(input.Email, input.Password),
 		CreatedAt: time.Now(),

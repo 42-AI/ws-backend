@@ -60,6 +60,7 @@ type User {
 input newUser {
   email: String!
   password: String!
+  isAdmin: Boolean
 }
 
 type Query {
