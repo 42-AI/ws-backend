@@ -14,6 +14,7 @@ type Configuration struct {
 	WS_API_PORT  string
 	WS_GRPC_HOST string
 	WS_GRPC_PORT string
+	WS_CORS_ALLOWED_ORIGIN		 string
 
 	// WorkStation_ElasticSearch
 	WS_ES_HOST     string

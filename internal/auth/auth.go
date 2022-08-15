@@ -16,7 +16,7 @@ import (
 const (
 	userCtxKey  = "user"
 	userIDClaim = "user_id"
-	authHeader  = "auth"
+	AuthHeader  = "auth"
 	salt        = "b?6e?YQ5894@8pY$"
 )
 
@@ -64,7 +64,7 @@ func (m *auth) Middleware() func(http.Handler) http.Handler {
 				return
 			}
 
-			tokenHeader := r.Header.Get(authHeader)
+			tokenHeader := r.Header.Get(AuthHeader)
 			if tokenHeader == "" {
 				m.log.Debug("unauthenticated user")
 				next.ServeHTTP(w, r)
