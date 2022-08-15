@@ -41,6 +41,7 @@ IS_DEV_ENV=true
 TOKEN_DURATION_HOURS=24
 WS_ES_USERNAME=""
 WS_ES_PWD=""
+WS_CORS_ALLOWED_ORIGIN=http://localhost:3000
 ```
 - Start the elastic and kibana cluster: `make elastic`
 - Check kibana container logs: `docker logs ws-backend_kibana_1 -f`   
