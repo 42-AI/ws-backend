@@ -10,8 +10,8 @@ import (
 	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
-	"go.uber.org/zap"
 	"github.com/rs/cors"
+	"go.uber.org/zap"
 
 	"github.com/42-AI/ws-backend/graph"
 )
