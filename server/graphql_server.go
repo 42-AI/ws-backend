@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"github.com/42-AI/ws-backend/db"
 	"github.com/42-AI/ws-backend/graph/playground"
+	"github.com/42-AI/ws-backend/internal/auth"
 	"github.com/go-chi/chi"
 	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/rs/cors"
 	"go.uber.org/zap"
 
 	"github.com/42-AI/ws-backend/graph"
@@ -30,6 +32,13 @@ func RunGraphQL(bootstrap bool) {
 	}
 
 	router := chi.NewRouter()
+	router.Use(cors.New(cors.Options{
+		AllowedOrigins:   []string{app.conf.WS_CORS_ALLOWED_ORIGIN},
+		AllowCredentials: true,
+		AllowedMethods:   []string{"GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"},
+		AllowedHeaders:   []string{"Content-Type", auth.AuthHeader},
+		Debug:            true,
+	}).Handler)
 	router.Use(app.auth.Middleware())
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: resolver}))
