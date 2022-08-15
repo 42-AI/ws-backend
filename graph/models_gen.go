@@ -61,6 +61,7 @@ type NewTask struct {
 type NewUser struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	IsAdmin  *bool  `json:"isAdmin"`
 }
 
 type Status string

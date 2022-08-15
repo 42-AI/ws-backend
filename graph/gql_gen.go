@@ -423,6 +423,7 @@ type User {
 input newUser {
   email: String!
   password: String!
+  isAdmin: Boolean
 }
 
 type Query {
@@ -2613,6 +2614,14 @@ func (ec *executionContext) unmarshalInputnewUser(ctx context.Context, obj inter
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("password"))
 			it.Password, err = ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		case "isAdmin":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("isAdmin"))
+			it.IsAdmin, err = ec.unmarshalOBoolean2ᚖbool(ctx, v)
 			if err != nil {
 				return it, err
 			}

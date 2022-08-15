@@ -96,6 +96,7 @@ query login {
       token
       userId
       username
+      isAdmin
     }
     ... on Error {
       code
@@ -126,7 +127,7 @@ We will now see how to create user and task with the GraphQL API.
 - To create a new user, paste the following in the console:
 ```graphql
 mutation tuto_create_user {
-    create_user(input:{email:"test@gmail.com", password:"test"}) {
+    create_user(input:{email:"test@gmail.com", password:"test", isAdmin:false}) {
         id
         admin
         email
