@@ -43,7 +43,7 @@ WS_ES_USERNAME=""
 WS_ES_PWD=""
 ```
 - Start the elastic and kibana cluster: `make elastic`
-- Check kibana container logs: `docker logs ws-backend_kibana_1 -f`   
+- Check kibana container logs: `docker logs ws-backend-kibana-1 -f`   
 - Wait until you see:
 ```dockerfile
 {"type":"log","@timestamp":"2021-03-28T15:11:50+00:00","tags":["listening","info"],"pid":7,"message":"Server running at http://0:5601"}
@@ -52,6 +52,28 @@ WS_ES_PWD=""
 ```
 - Start the GraphQL server `make gql FLAG="--bootstrap"`  
   The bootstrap option initialise the DB by creating the required index and indexing default users
+- Troubleshoot with `go get -u golang.org/x/sys` if the previous comand fails with this message:
+```
+go fmt ./...
+cmd/root.go
+cmd/run.go
+cmd/run_graphql.go
+cmd/run_grpc.go
+go vet ./...
+# golang.org/x/sys/unix
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/syscall_darwin.1_13.go:25:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.1_13.go:27:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.1_13.go:40:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:28:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:43:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:59:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:75:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:90:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:105:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:121:3: //go:linkname must refer to declared function or variable
+../../../go/pkg/mod/golang.org/x/sys@v0.0.0-20200116001909-b77594299b42/unix/zsyscall_darwin_amd64.go:121:3: too many errors
+make: *** [lint] Error 2
+```
 - Open a new terminal in the same repo 
 - Start the gRPC server: `make grpc`
   
