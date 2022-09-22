@@ -34,6 +34,18 @@ func (es *esHandler) GetTasksByUserID(ctx context.Context, id string) ([]Task, e
 	return tasks, nil
 }
 
+func (es *esHandler) GetTaskByTaskID(ctx context.Context, id string) ([]Task, error) {
+	es.log.Debug("get task by taskID", zap.String("id", id))
+	query := elastic.NewMatchQuery("id", id)
+	s := elastic.NewSearchSource().Query(query)
+	tasks, err := es.searchTasks(ctx, s)
+	if err != nil {
+		return nil, err
+	}
+
+	return tasks, nil
+}
+
 func (es *esHandler) GetNextTask(ctx context.Context) (*Task, error) {
 	es.log.Debug("searching most recent task")
 	q := elastic.NewMatchQuery(taskFieldStatus, StatusNotStarted)
